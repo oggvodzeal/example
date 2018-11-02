@@ -1,0 +1,66 @@
+static void Main(string[] args)
+        {
+            string a,b,c,r;
+            double s_triangle, p, s_circle;
+            bool right_triangle;
+            Console.ForegroundColor = ConsoleColor.Green;
+            //----------------------------------------------------------------------------------
+            Console.WriteLine("Вычисляем площать круга по радиусу.Enter чтобы продолжить...");
+            Console.WriteLine("Введите радиус");
+            r = Console.ReadLine();
+            s_circle = 3.14 * (Math.Pow(Convert.ToInt32(r),2));//Вычисляем площадь круга
+            Console.WriteLine("Площадь круга равна " + s_circle.ToString());
+            //----------------------------------------------------------------------------------
+            Console.WriteLine("Вычисляем площать треугольника по 3 сторонам.Enter чтобы продолжить...");
+            Console.WriteLine("Введите первую сторону");
+            a = Console.ReadLine();
+            Console.WriteLine("Введите вторую сторону");
+            b = Console.ReadLine();
+            Console.WriteLine("Введите третью сторону");
+            c = Console.ReadLine();
+            p = (Convert.ToInt32(a) + Convert.ToInt32(b) + Convert.ToInt32(c)) / 2;//Вычисляем вначеле полупериметр
+            s_triangle = Math.Sqrt(p * (p - Convert.ToInt32(a))*(p- Convert.ToInt32(b))*(p- Convert.ToInt32(c)));//Вычисляем площадь квадрата
+            Console.WriteLine("Площадь треугольника равна "+ s_triangle.ToString());
+            //-------------------------------------------------------------------------------------
+            //---------------Проверку на то, является ли треугольник прямоугольным по теореме Пифагора
+            if (Math.Pow(Convert.ToInt32(a), 2) == (Math.Pow(Convert.ToInt32(b), 2)) + Math.Pow(Convert.ToInt32(c), 2))
+            {
+                right_triangle = true;
+            }
+            else { right_triangle = false; }
+            if (Math.Pow(Convert.ToInt32(b), 2) == (Math.Pow(Convert.ToInt32(a), 2)) + Math.Pow(Convert.ToInt32(c), 2))
+            {
+                right_triangle = true;
+            }
+            else { right_triangle = false; }
+            if (Math.Pow(Convert.ToInt32(c), 2) == (Math.Pow(Convert.ToInt32(b), 2)) + Math.Pow(Convert.ToInt32(a), 2))
+            {
+                right_triangle = true;
+            }
+            else { right_triangle = false; }
+            if (right_triangle == true) { Console.WriteLine("Треугольник является прямоугольным"); } else { Console.WriteLine("Треугольник не является прямоугольным"); }
+            //-------------------------------------------------------------------------------------
+            /*
+             В базе данных MS SQL Server есть продукты и категории. Одному продукту может соответствовать много категорий, 
+             в одной категории может быть много продуктов. Представьте схему такой БД и напишите SQL запрос для выбора всех пар «Имя продукта – Имя категории». 
+             Если у продукта нет категорий, то его имя все равно должно выводиться.
+             */
+            /*
+
+            create table Categories (id uniqueidentifier not null primary key, name nvarchar(256) not null unqiue)
+            create table Products (id uniqueidentifier not null primary key, name nvarchar(256) not null unique)
+            create table ProductsCategories
+            (
+            product_id uniqueidentifier,
+            categoryId uniqueidentifier,
+            foreign key (product_id) references Products(id),
+            foreign key (category_id) references Categories (id),
+            constraint PK_ProductsCategories primary key (product_id,category_id)
+            )
+
+                select p.name, c.name from 
+	            products p left outer join productscategories pc on p.id = pc.product_id 
+	            left join categories c on c.id = pc.category_id
+
+             */
+        }
